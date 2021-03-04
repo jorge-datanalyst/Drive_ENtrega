@@ -21,7 +21,7 @@ luego de acuerdo a permisos de los grupos emilina los usuarios que no deben tene
 #Credenciales y parametros para autenticación con API DRIVE 
 # Lo cambie de ruta, no se ha provado
 
-Path_Secret_File = ""
+Path_Secret_File = "/home/jorgeda/Downloads/Quantil/private/drive_aut.json"
 CLIENT_SECRET_FILE = Path_Secret_File
 SCOPES=["https://www.googleapis.com/auth/drive"]
 
@@ -103,7 +103,8 @@ def manage_permissions(LIST_METADATA):
     # print('member_empleados',member_empleados) 
 
     for l in LIST_METADATA:
-        if l['name'] == 'Directores y Administrativos':
+        
+        if l['name'] == 'Directores y Administrativos' or l['name'] == 'Directores y Administración':
             # print('Directores y Administrativos')
             iddriv = l['id']
             lp = list_permissions(ID_DRIVE=iddriv)
@@ -132,7 +133,7 @@ def manage_permissions(LIST_METADATA):
                     delete_permissions(ID_PERMISSIONS=i['id'], ID_DRIVE=iddriv)
             
 
-        if l['name'] == 'Directores Generales y Administrativos':
+        if l['name'] == 'Directores Generales y Administrativos' or l['name'] == 'Directores Generales y Administración':
             # print('Directores Generales y Administrativos')
             iddriv = l['id']
             lp = list_permissions(ID_DRIVE=iddriv)
@@ -146,7 +147,7 @@ def manage_permissions(LIST_METADATA):
                     # print(gp['emailAddress'], 'No debe tener permisos en esta carpeta')
                     delete_permissions(ID_PERMISSIONS=i['id'], ID_DRIVE=iddriv)
 
-        if l['name'] == 'Administrativos':
+        if l['name'] == 'Administrativos' or l['name'] == 'Administración':
             # print('Administrativos')
             iddriv = l['id']
             lp = list_permissions(ID_DRIVE=iddriv)
@@ -189,7 +190,7 @@ def search_drive():
                                                 pageToken=page_token).execute()
             for file in response.get('files', []):
                 # Process change
-                if file.get('name') == 'Directores y Administrativos':
+                if file.get('name') == 'Directores y Administrativos' or file.get('name') == 'Directores y Administración':
                     # print('Encontrado')
                     # print ('Found file: %s (%s)' % (file.get('name'), file.get('id')))
                     list_metadata.append(file)
@@ -201,12 +202,12 @@ def search_drive():
                     # print ('Found file: %s (%s)' % (file.get('name'), file.get('id')))
                     list_metadata.append(file)
 
-                elif file.get('name') == 'Directores Generales y Administrativos':
+                elif file.get('name') == 'Directores Generales y Administrativos' or file.get('name') == 'Directores Generales y Administración':
                     # print('Encontrado')
                     # print ('Found file: %s (%s)' % (file.get('name'), file.get('id')))
                     list_metadata.append(file)
 
-                elif file.get('name') == 'Administrativos':
+                elif file.get('name') == 'Administrativos' or file.get('name') == 'Administración':
                     # print('Encontrado')
                     # print ('Found file: %s (%s)' % (file.get('name'), file.get('id')))
                     list_metadata.append(file)

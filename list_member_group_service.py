@@ -22,7 +22,7 @@ def members_groups(GROUP):
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    Path_Secre_File = ""
+    Path_Secre_File = "/home/jorgeda/Downloads/Quantil/private/Directory_API_Quantil.json"
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
             creds = pickle.load(token)

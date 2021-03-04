@@ -12,7 +12,7 @@ import list_member_group_service
 def main():    
     #Credenciales y parametros para autenticación con API DRIVE 
     # Lo cambie de ruta, no se ha provado
-    Path_Secret_File = ""
+    Path_Secret_File = "/home/jorgeda/Downloads/Quantil/private/drive_aut.json"
     CLIENT_SECRET_FILE = Path_Secret_File
     SCOPES=["https://www.googleapis.com/auth/drive"]
 
