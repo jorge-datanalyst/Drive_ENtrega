@@ -133,7 +133,7 @@ def manage_permissions(LIST_METADATA):
                     delete_permissions(ID_PERMISSIONS=i['id'], ID_DRIVE=iddriv)
             
 
-        if l['name'] == 'Directores Generales y Administrativos' or l['name'] == 'Directores Generales y Administración':
+        elif l['name'] == 'Directores Generales y Administrativos' or l['name'] == 'Directores Generales y Administración':
             # print('Directores Generales y Administrativos')
             iddriv = l['id']
             lp = list_permissions(ID_DRIVE=iddriv)
@@ -147,7 +147,7 @@ def manage_permissions(LIST_METADATA):
                     # print(gp['emailAddress'], 'No debe tener permisos en esta carpeta')
                     delete_permissions(ID_PERMISSIONS=i['id'], ID_DRIVE=iddriv)
 
-        if l['name'] == 'Administrativos' or l['name'] == 'Administración':
+        elif l['name'] == 'Administrativos' or l['name'] == 'Administración':
             # print('Administrativos')
             iddriv = l['id']
             lp = list_permissions(ID_DRIVE=iddriv)
@@ -161,7 +161,7 @@ def manage_permissions(LIST_METADATA):
                     # print(gp['emailAddress'], 'No debe tener permisos en esta carpeta')
                     delete_permissions(ID_PERMISSIONS=i['id'], ID_DRIVE=iddriv)
 
-        if l['name'] == 'Todo Quantil':
+        elif l['name'] == 'Todo Quantil':
             # print('Todo Quantil')
             iddriv = l['id']
             lp = list_permissions(ID_DRIVE=iddriv)

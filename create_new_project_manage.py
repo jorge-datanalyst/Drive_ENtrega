@@ -124,6 +124,7 @@ def main():
             for lf in LIST_FOLDER:
                 file_name = {
                     'name': lf,
+                    'sendNotificationEmail' : 'false',
                     'mimeType': 'application/vnd.google-apps.folder',
                     'parents':[ID_PARENTS], # Esta sera la carpeta padre, si se comenta se crearan las carpetas en la unidad principal
 
@@ -145,7 +146,7 @@ def main():
             permission = {'role': 'writer', 
                         'type' : 'group', 
                         'emailAddress': EMAIL_ADDRESS}
-            drive.permissions().create(fileId=ID_DRIVE, body=permission).execute()
+            drive.permissions().create(fileId=ID_DRIVE, body=permission, sendNotificationEmail=False).execute()
             return 
         except errors.HttpError as error:
             print('An error occurred:', error)
@@ -180,7 +181,7 @@ def main():
         # print('member_empleados',member_empleados) 
 
         for l in LIST_METADATA:
-            if l['name'] == 'Directores y Administrativos':
+            if l['name'] == 'Directores y Administrativos' or l['name'] == 'Directores y Administración':
                 # print('Directores y Administrativos')
                 iddriv = l['id']
                 lp = list_permissions(ID_DRIVE=iddriv)
@@ -209,7 +210,7 @@ def main():
                         delete_permissions(ID_PERMISSIONS=i['id'], ID_DRIVE=iddriv)
                 
 
-            if l['name'] == 'Directores Generales y Administrativos':
+            elif l['name'] == 'Directores Generales y Administrativos' or l['name'] == 'Directores Generales y Administración':
                 # print('Directores Generales y Administrativos')
                 iddriv = l['id']
                 lp = list_permissions(ID_DRIVE=iddriv)
@@ -223,7 +224,7 @@ def main():
                         # print(gp['emailAddress'], 'No debe tener permisos en esta carpeta')
                         delete_permissions(ID_PERMISSIONS=i['id'], ID_DRIVE=iddriv)
 
-            if l['name'] == 'Administrativos':
+            elif l['name'] == 'Administrativos' or l['name'] == 'Administración':
                 # print('Administrativos')
                 iddriv = l['id']
                 lp = list_permissions(ID_DRIVE=iddriv)
@@ -237,7 +238,7 @@ def main():
                         # print(gp['emailAddress'], 'No debe tener permisos en esta carpeta')
                         delete_permissions(ID_PERMISSIONS=i['id'], ID_DRIVE=iddriv)
 
-            if l['name'] == 'Todo Quantil':
+            elif l['name'] == 'Todo Quantil':
                 # print('Todo Quantil')
                 iddriv = l['id']
                 lp = list_permissions(ID_DRIVE=iddriv)
@@ -286,11 +287,17 @@ def main():
             print('An error occurred:', error)
     
     #Lista de carpetas que se crearan
-    list_folder = ['Directores y Administrativos',
-                   'Directores y Dirección Administrativa',
-                   'Directores Generales y Administrativos', 
-                   'Administrativos',
-                   'Todo Quantil']
+    # list_folder = ['Directores y Administrativos',
+    #                'Directores y Dirección Administrativa',
+    #                'Directores Generales y Administrativos', 
+    #                'Administrativos',
+    #                'Todo Quantil']
+    list_folder = ["Directores y Administración",
+                    "Directores y Dirección Administrativa", 
+                    "Directores Generales y Administración",
+                    "Administración",
+                    "Todo Quantil"]
+
     #Lista de metadatos de cada carpeta creada
     list_metadata = []
     searchfolder = search_drive()
@@ -315,6 +322,8 @@ def main():
             var_folder_project_permissions = create_folder(ID_PARENTS = var_folder_project[0]['id'], LIST_FOLDER=list_folder)
             ####*** Asigna permisos a todo los mienbros del grupo "empleados@quantil.com.co" a la carpeta del proyecto recien creado***###
             # Primero obtenemos una lista de los miembros de empleados@quantil.com.co 
+            # @quantil.com.co, 01qoc8b127t2hl9
+            # empleados@quantil.com.co, 03cqmetx3x4zz9p 
             list_mem_group = list_member_group_service.members_groups(GROUP = '03cqmetx3x4zz9p') # ID grupo de empleados@quantil.com.co
             # Asigna a la lista anterior de usuarios acceso las carpetas predeterminadas del proyecto
             assign_permissions_folder(LIST_PERMISSIONS=list_mem_group, ID_FOLDER=var_folder_project_permissions[0]['id'])
