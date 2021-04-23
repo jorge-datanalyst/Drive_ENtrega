@@ -39,16 +39,17 @@ def create_permissions(EMAIL_ADDRESS, ID_DRIVE):
         return None
 
 # Hace lista con todo los usuarios del grupo empleados@quantil.com.co
-# list_mem_group = list_member_group_service.members_groups(GROUP = '03cqmetx3x4zz9p') # ID grupo de empleados@quantil.com.co
-list_mem_group = list_member_group_service.members_groups(GROUP = '01qoc8b127t2hl9') # ID grupo de tic@quantil.com.co
+list_mem_group = list_member_group_service.members_groups(GROUP = '03cqmetx3x4zz9p') # ID grupo de empleados@quantil.com.co
+#list_mem_group = list_member_group_service.members_groups(GROUP = '01qoc8b127t2hl9') # ID grupo de tic@quantil.com.co
 # Se debe colocar el ID del drive al que se le quiere asignar los permisos
-id_folder = '10iCGeLsqx4IKULt_lLmNpTCqIdTyQAtC' 
+id_folder = '1c9QuElZc9EMhiG4WK7WeJ5nXjkSvk5jX' 
 
 # Asignar acceso de todos los usuarios a un Proyecto (folder)
 def assign_permissions_folder(LIST_PERMISSIONS, ID_FOLDER):
     for j in LIST_PERMISSIONS:
         create_permissions(EMAIL_ADDRESS=j, ID_DRIVE=ID_FOLDER)
-
+    print('Se asigno todo los usuario del grupo empleados@quantil.com.co a todas las carpetas de Gestión Documental, \n
+            se debe correr el script list_manage_permissions_drive_gp.py para gestionar los permisos correctamente')
 
 
 assign_permissions_folder(LIST_PERMISSIONS=list_mem_group, ID_FOLDER=id_folder)

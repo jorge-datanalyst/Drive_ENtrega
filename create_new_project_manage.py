@@ -82,7 +82,7 @@ def main():
 
     ###################################--END--######################################
 
-    # Encontrar carpeta pde proyectos
+    # Encontrar carpeta de proyectos
     def search_drive():
 
         page_token = None
